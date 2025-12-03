@@ -13,14 +13,33 @@
 
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
-        function ChatInput(){
+        function ChatInput({chatMessages, setChatMessages}){
+
+            const [inputText, setInputText] = React.useState('');
+
+            function saveInputText(event){
+                setInputText(event.target.value);
+            }
+
+            function sendMessage(){
+                setChatMessages([
+                    ...chatMessages,
+                    {
+                        message: 'test',
+                        sender: 'user',
+                        id: crypto.randomUUID()
+                    }
+                ]);
+            }
+
             return(
                 <>
                     <input 
                         placeholder="Send a message to chatbot" 
                         size="30"
+                        onChange={saveInputText}
                     />
-                    <button>Send</button>
+                    <button onClick={sendMessage}>Send</button>
                 </>
             );
         }
@@ -53,8 +72,24 @@
             );
         }
 
-        function ChatMessages(){
-            const array = React.useState([{
+        function ChatMessages({chatMessages}){
+            return (
+                <> 
+                    {chatMessages.map((chatMessage) => {
+                        return(
+                            <ChatMessage
+                                message={chatMessage.message}
+                                sender={chatMessage.sender}
+                                key={chatMessage.id}
+                            />
+                        );
+                    })}
+                </>
+            );
+        }
+
+        function App(){
+            const [chatMessages, setChatMessages] = React.useState([{
                 message: 'Hello chatbot',
                 sender: 'user',
                 id: 'id1'
@@ -71,43 +106,21 @@
                 sender: 'robot',
                 id: 'id4'
             }]);
-            const chatMessages = array[0]; //currentData
-            const setChatMessages = array[1]; //updaterFunction
+            // const [chatMessages, setChatMessages] = array;
 
-            function sendMessage(){
-                setChatMessages([
-                    ...chatMessages,
-                    {
-                        message: 'test',
-                        sender: 'user',
-                        id: crypto.randomUUID()
-                    }
-                ]);
-            }
+            // const chatMessages = array[0]; //currentData
+            //const setChatMessages = array[1]; //updaterFunction
 
-
-            return (
-                <>    
-                    <button onClick={sendMessage}>Send message</button>
-
-                    {chatMessages.map((chatMessage) => {
-                        return(
-                            <ChatMessage
-                                message={chatMessage.message}
-                                sender={chatMessage.sender}
-                                key={chatMessage.id}
-                            />
-                        );
-                    })}
-                </>
-            );
-        }
-
-        function App(){
             return (
                 <>
-                    <ChatInput />
-                    <ChatMessages />
+                    <ChatInput 
+                        chatMessages={chatMessages}
+                        setChatMessages={setChatMessages}
+                    />
+                    <ChatMessages 
+                        chatMessages={chatMessages}
+                    />
+                        
                 </>
             );
         }
