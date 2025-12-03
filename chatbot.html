@@ -15,9 +15,18 @@
     <script type="text/babel">
         function ChatInput(){
             return(
-                <div>
-                    <input />
+                <>
+                    <input placeholder="Send a message to chatbot" size="30"/>
                     <button>Send</button>
+                </>
+            );
+        }
+
+        function ChatMessages(){
+            return (
+                <div>
+                    hello Chatbot
+                    <img src="user.png" width="50"/>
                 </div>
             );
         }
@@ -26,6 +35,7 @@
             return (
                 <>
                     <ChatInput />
+                    <ChatMessages />
                 </>
             );
         }
