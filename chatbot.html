@@ -14,15 +14,14 @@
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
         function ChatInput({chatMessages, setChatMessages}){
-
             const [inputText, setInputText] = React.useState('');
 
             function saveInputText(event){
                 setInputText(event.target.value);
             }
 
-
             async function sendMessage(){
+                setInputText('');
                 const newChatMessages = [
                     ...chatMessages,
                     {
@@ -31,7 +30,17 @@
                         id: crypto.randomUUID()
                     }
                 ]
-                setChatMessages(newChatMessages);
+                setChatMessages([
+                    ...newChatMessages,
+                    // This creates a temporary Loading... message.
+                    // Because we don't save this message in newChatMessages,
+                    // it will be remove later, when we add the response.
+                    {
+                    message: 'Loading...',
+                    sender: 'robot',
+                    id: crypto.randomUUID()
+                    }
+                ]);
 
                 const response = await Chatbot.getResponseAsync(inputText);
                 setChatMessages([
@@ -43,7 +52,6 @@
                     }
                 ]);
                
-                setInputText('');
             }
 
             function handleKeyDown(event){
