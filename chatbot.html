@@ -25,7 +25,7 @@
             );
         }
 
-        function ChatMessages({message,sender}){
+        function ChatMessage({message,sender}){
             //const message = props.message;
             //const sender = props.sender;
             //const {message, sender} = props;
@@ -53,26 +53,47 @@
             );
         }
 
+        function ChatMessages(){
+            const chatMessages = [{
+                message: 'Hello chatbot',
+                sender: 'user',
+                id: 'id1'
+            }, {
+                message: 'Hello! How can I help you?',
+                sender: 'robot',
+                id: 'id2'
+            }, {
+                message: 'Can you get me todays date',
+                sender: 'user',
+                id: 'id3'
+            }, {
+                message: 'Today is December 3',
+                sender: 'robot',
+                id: 'id4'
+            }];
+
+            return (
+                <>    
+                    {chatMessages.map((chatMessage) => {
+                        return(
+                            <ChatMessage
+                                message={chatMessage.message}
+                                sender={chatMessage.sender}
+                                key={chatMessage.id}
+                            />
+                        );
+                    })}
+                </>
+            );
+        }
+
         function App(){
+
+
             return (
                 <>
                     <ChatInput />
-                    <ChatMessages 
-                        message="hello chatbot" 
-                        sender="user"
-                    />
-                    <ChatMessages 
-                        message="Hello! How can I help you?" 
-                        sender="robot" 
-                    />
-                    <ChatMessages 
-                        message="Can you get me todays date" 
-                        sender="user"
-                    />
-                    <ChatMessages 
-                        message="Today is December 3" 
-                        sender="robot"
-                    />
+                    <ChatMessages />
                 </>
             );
         }
