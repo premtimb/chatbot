@@ -16,29 +16,39 @@
         function ChatInput(){
             return(
                 <>
-                    <input placeholder="Send a message to chatbot" size="30"/>
+                    <input 
+                        placeholder="Send a message to chatbot" 
+                        size="30"
+                    />
                     <button>Send</button>
                 </>
             );
         }
 
-        function ChatMessages(props){
-            const message = props.message;
-            const sender = props.sender;
+        function ChatMessages({message,sender}){
+            //const message = props.message;
+            //const sender = props.sender;
+            //const {message, sender} = props;
 
+            /*
             if (sender === 'robot'){
                 return (
                 <div>
                     <img src="robot.png" width="50"/>
                     {message}
                 </div>
-            );
-            }
+                );
+            }*/
 
             return (
                 <div>
+                    {sender === 'robot' && 
+                        (<img src="robot.png" width="50"/>
+                    )}
                     {message}
-                    <img src="user.png" width="50"/>
+                    {sender === 'user' && 
+                        (<img src="user.png" width="50"/>
+                    )}
                 </div>
             );
         }
@@ -47,10 +57,22 @@
             return (
                 <>
                     <ChatInput />
-                    <ChatMessages message="hello chatbot" sender="user"/>
-                    <ChatMessages message="Hello! How can I help you?" sender="robot" />
-                    <ChatMessages message="Can you get me todays date" sender="user"/>
-                    <ChatMessages message="Today is December 3" sender="robot"/>
+                    <ChatMessages 
+                        message="hello chatbot" 
+                        sender="user"
+                    />
+                    <ChatMessages 
+                        message="Hello! How can I help you?" 
+                        sender="robot" 
+                    />
+                    <ChatMessages 
+                        message="Can you get me todays date" 
+                        sender="user"
+                    />
+                    <ChatMessages 
+                        message="Today is December 3" 
+                        sender="robot"
+                    />
                 </>
             );
         }
