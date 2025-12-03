@@ -13,7 +13,25 @@
 
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
-        
+        function ChatInput(){
+            return(
+                <div>
+                    <input />
+                    <button>Send</button>
+                </div>
+            );
+        }
+
+        function App(){
+            return (
+                <>
+                    <ChatInput />
+                </>
+            );
+        }
+
+        const container = document.querySelector('.js-container');
+        ReactDOM.createRoot(container).render(<App />);
     </script>
   </body>
 </html>
