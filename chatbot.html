@@ -22,14 +22,27 @@
             }
 
             function sendMessage(){
-                setChatMessages([
+                const newChatMessages = [
                     ...chatMessages,
                     {
-                        message: 'test',
+                        message: inputText,
                         sender: 'user',
                         id: crypto.randomUUID()
                     }
+                ]
+                setChatMessages(newChatMessages);
+
+                const response = Chatbot.getResponse(inputText);
+                setChatMessages([
+                    ...newChatMessages,
+                    {
+                        message: response,
+                        sender: 'robot',
+                        id: crypto.randomUUID()
+                    }
                 ]);
+               
+                setInputText('');
             }
 
             return(
@@ -38,6 +51,7 @@
                         placeholder="Send a message to chatbot" 
                         size="30"
                         onChange={saveInputText}
+                        value={inputText}
                     />
                     <button onClick={sendMessage}>Send</button>
                 </>
