@@ -196,7 +196,10 @@
             const chatMessagesRef = React.useRef(null);
 
             React.useEffect(() => {
-                chatMessagesRef.current;
+                const containerElem = chatMessagesRef.current;
+                if(containerElem){
+                    containerElem.scrollTop = containerElem.scrollHeight;
+                }
             },[chatMessages]);
 
             return (
