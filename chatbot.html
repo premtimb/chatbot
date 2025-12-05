@@ -69,6 +69,10 @@
             color:rgb(120, 120, 120);
             text-align: center;
         }
+        .loading-spinner{
+            height: 40px;
+            margin: -15px;
+        }
     </style>
   </head>
   <body>
@@ -113,7 +117,7 @@
                     // Because we don't save this message in newChatMessages,
                     // it will be remove later, when we add the response.
                     {
-                    message: 'Loading...',
+                    message: <img src="loading-spinner.gif" className="loading-spinner" />,
                     sender: 'robot',
                     id: crypto.randomUUID()
                     }
