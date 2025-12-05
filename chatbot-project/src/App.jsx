@@ -1,5 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import {Chatbot} from 'supersimpledev';
+import RobotProfileImage from './assets/robot.png';
+import UserProfileImage from './assets/user.png';
+import RobotLoadingSpinner from './assets/loading-spinner.gif'
 import './App.css'
 
 function ChatInput({chatMessages, setChatMessages}){
@@ -34,7 +37,7 @@ function ChatInput({chatMessages, setChatMessages}){
                     // Because we don't save this message in newChatMessages,
                     // it will be remove later, when we add the response.
                     {
-                    message: <img src="loading-spinner.gif" className="loading-spinner" />,
+                    message: <img src={RobotLoadingSpinner} className="loading-spinner" />,
                     sender: 'robot',
                     id: crypto.randomUUID()
                     }
@@ -105,13 +108,13 @@ function ChatInput({chatMessages, setChatMessages}){
                         : 'chat-message-robot'
                 }>
                     {sender === 'robot' && 
-                        (<img src="robot.png" className='chat-message-profile'/>
+                        (<img src={RobotProfileImage} className='chat-message-profile'/>
                     )}
                     <div className='chat-message-text'>
                         {message}
                     </div>
                     {sender === 'user' && 
-                        (<img src="user.png" className='chat-message-profile'/>
+                        (<img src={UserProfileImage} className='chat-message-profile'/>
                     )}
                 </div>
             );
