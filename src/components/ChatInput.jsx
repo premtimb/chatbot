@@ -69,6 +69,9 @@ function ChatInput({chatMessages, setChatMessages}){
         }
 
     }
+    function clearMessages(){
+        setChatMessages([]);
+    }
 
 
     return(
@@ -83,7 +86,16 @@ function ChatInput({chatMessages, setChatMessages}){
             />
             <button 
                 onClick={sendMessage} 
-                className="send-button">Send</button>
+                className="send-button"
+            >
+                Send
+            </button>
+            <button 
+                onClick={clearMessages}
+                className="clear-button"
+            > 
+                Clear
+            </button>
         </div>
     );
  }
